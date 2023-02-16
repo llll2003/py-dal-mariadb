@@ -1,4 +1,5 @@
 import unittest
+import time
 from xltdp.dal.mariadb.auth import Auth
 
 class TestAuth(unittest.TestCase):
@@ -12,6 +13,7 @@ class TestAuth(unittest.TestCase):
 
     def test_close(self):
         self.auth.close()
+        time.sleep(5) # Testing is sensitive.
         self.assertIsNone(self.auth.conn)
         self.assertIsNone(self.auth.cursor)
 

@@ -6,7 +6,7 @@ class TestDatabase(unittest.TestCase):
     def setUp(self):
         self.auth = Auth("127.0.0.1", "root", "password", "tests")
         self.auth.connect()
-        self.db = Database(self.auth, "my_database")
+        self.db = Database(self.auth, "tests")
 
     def test_create_database(self):
         self.db.create_database("my_new_database")

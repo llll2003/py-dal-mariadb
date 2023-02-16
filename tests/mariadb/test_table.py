@@ -7,9 +7,9 @@ class TestTable(unittest.TestCase):
     def setUp(self):
         self.auth = Auth("127.0.0.1", "root", "password", "tests")
         self.auth.connect()
-        self.db = Database(self.auth, "my_database")
-        self.db.create_database("my_new_database")
-        self.table = Table(self.auth, "my_database", "my_table")
+        self.db = Database(self.auth, "tests")
+        self.db.create_database("tests2")
+        self.table = Table(self.auth, "tests", "my_table")
 
     def test_create_table(self):
         self.table.create_table({"id": "INT", "name": "VARCHAR(255)", "email": "VARCHAR(255)"})

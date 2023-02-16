@@ -8,8 +8,8 @@ class TestRow(unittest.TestCase):
     def setUp(self):
         self.auth = Auth("127.0.0.1", "root", "password", "tests")
         self.auth.connect()
-        self.db = Database(self.auth, "my_database")
-        self.table = Table(self.auth, "my_database", "my_table")
+        self.db = Database(self.auth, "tests")
+        self.table = Table(self.auth, "tests", "my_table")
         self.row = Row(self.auth)
 
     def test_create_row(self):

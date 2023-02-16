@@ -4,7 +4,7 @@ from xltdp.dal.mariadb.database import Database
 
 class TestDatabase(unittest.TestCase):
     def setUp(self):
-        self.auth = Auth("localhost", "root", "password", "my_database")
+        self.auth = Auth("127.0.0.1", "root", "password", "my_database")
         self.auth.connect()
         self.db = Database(self.auth, "my_database")
 

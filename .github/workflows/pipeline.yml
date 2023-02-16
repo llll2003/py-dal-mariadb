@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install mariadb
-        run: apt-get install mariadb
+        run: apt install mariadb-server mariadb-client -y
       - name: Configure mariadb for Tests
         continue-on-error: true
         run: |
-        systemctl start mariadb
+        sudo systemctl start mariadb
         echo -e "\n\npassword\npassword\n\n\nn\n\n " | mysql_secure_installation 2>/dev/null
       - name: Setup Python
         uses: actions/setup-python@v4

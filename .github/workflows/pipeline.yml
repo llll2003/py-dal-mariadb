@@ -7,25 +7,29 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+
     steps:
       - uses: actions/checkout@v3
-      - name: Install mariadb
+
+      - name: Verify MariaDB connection
+        env:
+          PORT: ${{ job.services.mariadb.ports[3306] }}
         run: |
-          sudo apt install mariadb-server mariadb-client -y
-      - name: Configure mariadb for Tests
-        continue-on-error: true
-        run: |
-          sudo systemctl start mariadb
-          sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-            # current root password (emtpy after installation)
-          y # Set root password?
-          password # new root password
-          password # new root password
-          y # Remove anonymous users?
-          y # Disallow root login remotely?
-          y # Remove test database and access to it?
-          y # Reload privilege tables now?
-          EOF
+          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+            sleep 1
+          done          
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:

@@ -3,7 +3,7 @@ from xltdp.dal.mariadb.auth import Auth
 
 class TestAuth(unittest.TestCase):
     def setUp(self):
-        self.auth = Authentication("localhost", "root", "password", "my_database")
+        self.auth = Auth("localhost", "root", "password", "my_database")
         self.auth.connect()
 
     def test_connect(self):

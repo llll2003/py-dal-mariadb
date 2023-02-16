@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mysql flake8 bandit
+          pip install mysql-connector-python flake8 bandit
       - name: Lint with flake8
         run: flake8 xtldp/dal/mariadb/
         continue-on-error: true

@@ -1,4 +1,5 @@
-import mysql.connector
+import mariadb
+import sys
 
 class Row:
     def __init__(self, auth, database, table):

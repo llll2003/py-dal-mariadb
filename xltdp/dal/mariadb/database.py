@@ -1,4 +1,5 @@
-import mysql.connector
+import mariadb
+import sys
 
 class Database:
     def __init__(self, auth):

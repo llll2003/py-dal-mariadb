@@ -1,4 +1,5 @@
-import mysql.connector
+import mariadb
+import sys
 
 class Table:
     def __init__(self, auth, database):
@@ -29,20 +30,20 @@ class Table:
             query = f"ALTER TABLE {self.database}.{name} ADD COLUMN {column_definitions}"
             self.auth.cursor.execute(query)
             self.auth.conn.commit()
-    
+
     def update_table_modify(self, name, columns):
         current_columns = self.get_columns(name)
-        for name, datatype in columns.items():
-            if name in current_columns:
-                query = f"ALTER TABLE {self.database}.{name} MODIFY COLUMN {name} {datatype}"
+        for cname, cdatatype in columns.items():
+            if cname in current_columns:
+                query = f"ALTER TABLE {self.database}.{name} MODIFY COLUMN {cname} {cdatatype}"
                 self.auth.cursor.execute(query)
                 self.auth.conn.commit()
 
     def update_table_drop(self, name, columns):
         current_columns = self.get_columns(name)
-        for name in columns:
-            if name in current_columns:
-                query = f"ALTER TABLE {self.database}.{name} DROP COLUMN {name}"
+        for cname in columns:
+            if cname in current_columns:
+                query = f"ALTER TABLE {self.database}.{name} DROP COLUMN {cname}"
                 self.auth.cursor.execute(query)
                 self.auth.conn.commit()
 
